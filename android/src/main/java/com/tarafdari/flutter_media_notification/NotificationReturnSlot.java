@@ -10,23 +10,27 @@ public class NotificationReturnSlot extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         switch (intent.getAction()) {
-            case "prev":
-                FlutterMediaNotificationPlugin.callEvent("prev");
+            case "close":
+                FlutterMediaNotificationPlugin.callEvent("close");
                 break;
-            case "next":
-                FlutterMediaNotificationPlugin.callEvent("next");
-                break;
+//            case "prev":
+//                FlutterMediaNotificationPlugin.callEvent("prev");
+//                break;
+//            case "next":
+//                FlutterMediaNotificationPlugin.callEvent("next");
+//                break;
             case "toggle":
                 String title = intent.getStringExtra("title");
                 String author = intent.getStringExtra("author");
-                boolean play = intent.getBooleanExtra("play",true);
+                String artUri = intent.getStringExtra("artUri");
+                boolean play = intent.getBooleanExtra("play", true);
 
-                if(play)
+                if (play)
                     FlutterMediaNotificationPlugin.callEvent("play");
                 else
                     FlutterMediaNotificationPlugin.callEvent("pause");
 
-                FlutterMediaNotificationPlugin.showNotification(title, author,play);
+                FlutterMediaNotificationPlugin.showNotification(title, author, artUri, play);
                 break;
             case "select":
                 Intent closeDialog = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);

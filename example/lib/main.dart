@@ -28,6 +28,8 @@ class _MyAppState extends State<MyApp> {
     MediaNotification.setListener('prev', () {});
 
     MediaNotification.setListener('select', () {});
+
+    MediaNotification.setListener('close', () {});
   }
 
   @override
