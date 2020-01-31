@@ -58,6 +58,8 @@ class _MyAppState extends State<MyApp> {
                     MediaNotification.showNotification(
                         title: 'New Title',
                         author: 'New Song author',
+                        artUri:
+                            'https://beta.tamejida.org/uploads/images/7a170915b5c78a8f7cd856e5c2242fbe.jpg',
                         isPlaying: false);
                     setState(() => status = 'pause');
                   }),
