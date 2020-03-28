@@ -101,14 +101,14 @@ public class NotificationPanel extends Service {
                 .setContentTitle(title)
                 .setColor(0xFF067F7B)
                 .setContentText(author)
-                .setSubText(title)
+//                .setSubText(title)
                 .setContentIntent(selectPendingIntent);
 
         if (null == artUri || artUri.isEmpty()) {
             artBitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.logo);
             this.setImageAndBuildNotification(artBitmap, isPlaying);
         } else {
-            Log.i("art image","start Loding");
+            Log.i("art image", "start Loding");
             LoadImageTask loadImageTask = new LoadImageTask(manager, notificationBuilder);
             loadImageTask.execute(artUri);
         }
@@ -120,6 +120,10 @@ public class NotificationPanel extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Log.i("Fltr MediaNotifPlg", "onDestroy");
+
+        manager.cancel(NOTIFICATION_ID);
+
     }
 
     @Override
@@ -178,16 +182,16 @@ public class NotificationPanel extends Service {
                 return null;
             }
             try {
-                Log.i("art image","start Loding ...");
+                Log.i("art image", "start Loding ...");
                 final URL url = new URL(strings[0]);
                 final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setDoInput(true);
                 connection.connect();
                 final InputStream input = connection.getInputStream();
-                Log.i("art image","start Loding end");
+                Log.i("art image", "start Loding end");
                 return BitmapFactory.decodeStream(input);
             } catch (IOException e) {
-                Log.i("art image","error");
+                Log.i("art image", "error");
                 e.printStackTrace();
                 return null;
             }
@@ -199,11 +203,8 @@ public class NotificationPanel extends Service {
                 return;
             }
             builder.setLargeIcon(bitmap);
-            builder.setContentTitle("updated")
-                    .setContentText("updated")
-                    .setSubText("updated");
             manager.notify(NOTIFICATION_ID, builder.build());
-            Log.i("art image","update notif");
+            Log.i("Fltr MediaNotifPlg", "art image update notif");
         }
     }
 }

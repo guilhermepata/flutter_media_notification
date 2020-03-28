@@ -8,6 +8,7 @@ import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 import android.content.Intent;
+import android.util.Log;
 
 import androidx.core.content.ContextCompat;
 
@@ -82,5 +83,7 @@ public class FlutterMediaNotificationPlugin implements MethodCallHandler {
     private void hideNotification() {
         Intent serviceIntent = new Intent(registrar.context(), NotificationPanel.class);
         registrar.context().stopService(serviceIntent);
+        Log.i("Fltr MediaNotifPlg","hideNotification");
+
     }
 }
