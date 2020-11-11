@@ -37,10 +37,10 @@ public class NotificationPanel extends Service {
         MediaSessionCompat mediaSession = new MediaSessionCompat(this, MEDIA_SESSION_TAG);
 
 
-        int iconPlayPause = R.drawable.baseline_play_arrow_black_48;
+        int iconPlayPause = R.drawable.baseline_play_arrow_black_36;
         String titlePlayPause = "pause";
         if(isPlaying){
-            iconPlayPause=R.drawable.baseline_pause_black_48;
+            iconPlayPause=R.drawable.baseline_pause_black_36;
             titlePlayPause="play";
         }
 
@@ -69,14 +69,14 @@ public class NotificationPanel extends Service {
 //        MediaButtonReceiver.handleIntent(mediaSession, selectIntent);
 
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .addAction(R.drawable.baseline_skip_previous_black_48, "prev", pendingPrevIntent)
+                .addAction(R.drawable.baseline_skip_previous_black_36, "prev", pendingPrevIntent)
                 .addAction(iconPlayPause, titlePlayPause, pendingToggleIntent)
-                .addAction(R.drawable.baseline_skip_next_black_48, "next", pendingNextIntent)
+                .addAction(R.drawable.baseline_skip_next_black_36, "next", pendingNextIntent)
                 .setStyle(new androidx.media.app.NotificationCompat.MediaStyle()
                         .setShowActionsInCompactView(0, 1,2)
                         .setShowCancelButton(true)
                         .setMediaSession(mediaSession.getSessionToken()))
-                .setSmallIcon(R.drawable.ic_stat_music_note)
+                .setSmallIcon(R.drawable.baseline_timer_white_24)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setVibrate(new long[]{0L})
                 .setPriority(NotificationCompat.PRIORITY_MAX)
@@ -84,6 +84,7 @@ public class NotificationPanel extends Service {
                 .setContentText(author)
                 .setSubText(title)
                 .setContentIntent(selectPendingIntent)
+                // TODO: CHANGE BACKGROUND IMAGE
                 .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_stat_music_note))
                 .build();
 
